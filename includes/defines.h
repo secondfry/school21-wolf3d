@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/06 18:53:28 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/06 19:19:02 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,67 +55,100 @@ typedef struct		s_wolf
 	t_byte			flags;
 }					t_wolf;
 
-# define FLAG_REDRAW					(1u << 0u)
-# define FLAG_INVALIDATE_POSITION		(1u << 1u)
+# define FLAG_REDRAW				(1u << 0u)
+# define FLAG_INVALIDATE_POSITION	(1u << 1u)
 
 /*
+** === EVENTS ===
 ** https://tronche.com/gui/x/xlib/events/processing-overview.html
 ** https://refspecs.linuxfoundation.org/LSB_1.3.0/gLSB/gLSB/libx11-ddefs.html
 */
-# define EVENT_KEY_PRESS						2
-# define EVENT_KEY_RELEASE						3
-# define EVENT_BUTTON_PRESS						4
-# define EVENT_BUTTON_RELEASE					5
-# define EVENT_MOTION_NOTIFY					6
-# define EVENT_EXPOSE							12
+# define EVENT_KEY_PRESS		2
+# define EVENT_KEY_RELEASE		3
+# define EVENT_BUTTON_PRESS		4
+# define EVENT_BUTTON_RELEASE	5
+# define EVENT_MOTION_NOTIFY	6
+# define EVENT_EXPOSE			12
 
-# define EVENT_DESTROY_NOTIFY					17
+/*
+** Sent on XDestroyWindow or XDestroySubwindows
+*/
+# define EVENT_DESTROY_NOTIFY	17
 
-# define MASK_KEY_PRESS							1ul << 0u
-# define MASK_KEY_RELEASE						1ul << 1u
-# define MASK_BUTTON_PRESS						1ul << 2u
-# define MASK_BUTTON_RELEASE					1ul << 3u
-# define MASK_POINTER_MOTION					1ul << 6u
-# define MASK_EXPOSE							1ul << 15u
+/*
+** Sent on minimize
+*/
+# define EVENT_UNMAP_NOTIFY		18
 
-# define MASK_STRUCTURE_NOTIFY					(1L<<17)
+/*
+** Sent on unhide
+*/
+# define EVENT_MAP_NOTIFY		19
 
+/*
+** Sent on changes to a window's state, such as size, position, border, and stacking order
+*/
+# define EVENT_CONFIGURE_NOTIFY	22
+
+/*
+** Sent on client XSendEvent call (X press)
+*/
+# define EVENT_CLIENT_MESSAGE	33
+
+/*
+** === MASKS ===
+*/
+# define MASK_KEY_PRESS			(1ul << 0u)
+# define MASK_KEY_RELEASE		(1ul << 1u)
+# define MASK_BUTTON_PRESS		(1ul << 2u)
+# define MASK_BUTTON_RELEASE	(1ul << 3u)
+# define MASK_POINTER_MOTION	(1ul << 6u)
+# define MASK_EXPOSE			(1ul << 15u)
+
+/*
+** Used to receive CONFIGURE_NOTIFY, DESTROY_NOTIFY, MAP_NOTIFY, UNMAP_NOTIFY and others
+*/
+# define MASK_STRUCTURE_NOTIFY	(1ul << 17)
+
+/*
+** === KEYCODES ===
+*/
 # ifdef __APPLE__
-#  define KEY_A									0
-#  define KEY_S									1
-#  define KEY_D									2
-#  define KEY_F									3
-#  define KEY_G									5
-#  define KEY_Q									12
-#  define KEY_W									13
-#  define KEY_E									14
-#  define KEY_R									15
-#  define KEY_T									17
-#  define KEY_Z									6
-#  define KEY_X									7
-#  define KEY_C									8
-#  define KEY_ESC								53
+#  define KEY_A		0
+#  define KEY_S		1
+#  define KEY_D		2
+#  define KEY_F		3
+#  define KEY_G		5
+#  define KEY_Q		12
+#  define KEY_W		13
+#  define KEY_E		14
+#  define KEY_R		15
+#  define KEY_T		17
+#  define KEY_Z		6
+#  define KEY_X		7
+#  define KEY_C		8
+#  define KEY_ESC	53
 # else
-#  define KEY_A									97
-#  define KEY_C									99
-#  define KEY_D									100
-#  define KEY_E									101
-#  define KEY_F									102
-#  define KEY_G									103
-#  define KEY_H									104
-#  define KEY_Q									113
-#  define KEY_R									114
-#  define KEY_S									115
-#  define KEY_T									116
-#  define KEY_W									119
-#  define KEY_X									120
-#  define KEY_Z									122
-#  define KEY_ESC								65307
+#  define KEY_A		97
+#  define KEY_C		99
+#  define KEY_D		100
+#  define KEY_E		101
+#  define KEY_F		102
+#  define KEY_G		103
+#  define KEY_H		104
+#  define KEY_Q		113
+#  define KEY_R		114
+#  define KEY_S		115
+#  define KEY_T		116
+#  define KEY_W		119
+#  define KEY_X		120
+#  define KEY_Z		122
+#  define KEY_ESC	65307
 # endif
 
-# define MOUSE_1								1
-# define MOUSE_2								2
-# define MOUSE_WHEEL_OUT							5
-# define MOUSE_WHEEL_IN						4
+# define MOUSE_1			1
+# define MOUSE_2			2
+# define MOUSE_WHEEL_OUT	5
+# define MOUSE_WHEEL_IN		4
 
 #endif
