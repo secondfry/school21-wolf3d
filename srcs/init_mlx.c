@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 16:08:37 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/06 18:07:04 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 18:19:30 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,4 +49,29 @@ void	clear_mlx(t_mlx *mlx)
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
 	ft_memdel(&(mlx->mlx));
+}
+
+#if defined(MLX_LINUX)
+
+void	init_mlx_hooks_platform(t_wolf *wolf)
+{
+	mlx_hook(wolf->mlx->win,
+		EVENT_CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, loop_destroy_hook, wolf);
+}
+
+#elif defined(MLX_MACOS_METAL) || defined(MLX_MACOS)
+
+void	init_mlx_hooks_platform(t_wolf *wolf)
+{
+	mlx_hook(wolf->mlx->win,
+		EVENT_DESTROY_NOTIFY, 0, loop_destroy_hook, wolf);
+}
+
+#endif
+
+void	init_mlx_hooks(t_wolf *wolf)
+{
+	mlx_hook(wolf->mlx->win, EVENT_KEY_PRESS, KEY_PRESS_MASK, loop_key_hook, wolf);
+	mlx_loop_hook(wolf->mlx->mlx, loop_hook, wolf);
+	init_mlx_hooks_platform(wolf);
 }

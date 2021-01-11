@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 17:49:39 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 10:48:51 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:44:16 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,10 @@
 
 int		loop_hook(t_wolf *wolf)
 {
-	loop_calculate_wall_position(wolf);
+	loop_invalidate_position(wolf);
+	loop_invalidate_rotation(wolf);
+	loop_redraw(wolf);
+	loop_render_debug(wolf);
 	loop_before_next_update(wolf);
 	return (0);
 }

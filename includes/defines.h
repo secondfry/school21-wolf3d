@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 10:50:38 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 16:45:07 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,14 @@
 # define M_SQRT1_2_F 0.707106781186547524400844362104849039f
 # define SSIZE_T_MAX ((0ul - 1ul) >> 1ul)
 # define SSIZE_T_MIN (SSIZE_T_MAX + 1ul)
+# define EPSILON 0.001f
+# define WALL_HEIGHT 64
+# define FOV 60
+
+# if FOV == 0 || FOV > 179
+#  undef FOV
+#  define FOV 60
+# endif
 
 # define EINVAL 22
 
@@ -69,10 +77,15 @@ typedef struct		s_wolf
 	t_byte			map_width;
 	t_byte			map_height;
 	char			*map;
+	float			projection_distance;
 }					t_wolf;
 
-# define FLAG_REDRAW				(1u << 0u)
-# define FLAG_INVALIDATE_POSITION	(1u << 1u)
+enum			e_flags
+{
+	FLAG_REDRAW = (1u << 0u),
+	FLAG_INVALIDATE_POSITION = (1u << 1u),
+	FLAG_INVALIDATE_ROTATION = (1u << 2u),
+};
 
 /*
 ** === EVENTS ===
