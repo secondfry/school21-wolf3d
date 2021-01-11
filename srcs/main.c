@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/06 19:03:36 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 09:07:23 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int		main(void) {
 	
 	// input(&fdf, argv[argc - 1]);
 	// mlx_hook(fdf.win, EVENT_KEY_PRESS, MASK_KEY_PRESS, loop_key_hook, &fdf);
-	mlx_hook(mlx.win, EVENT_CLIENT_MESSAGE, MASK_STRUCTURE_NOTIFY, loop_destroy_hook, &wolf);
+	mlx_hook(mlx.win, EVENT_CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, loop_destroy_hook, &wolf);
 	mlx_loop_hook(mlx.mlx, loop_hook, &wolf);
 	mlx_loop(mlx.mlx);
 	return (0);

@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/06 19:19:02 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 09:08:02 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,44 +71,63 @@ typedef struct		s_wolf
 # define EVENT_EXPOSE			12
 
 /*
-** Sent on XDestroyWindow or XDestroySubwindows
+** Sent on XDestroyWindow or XDestroySubwindows.
 */
 # define EVENT_DESTROY_NOTIFY	17
 
 /*
-** Sent on minimize
+** Sent on minimize.
 */
 # define EVENT_UNMAP_NOTIFY		18
 
 /*
-** Sent on unhide
+** Sent on unhide.
 */
 # define EVENT_MAP_NOTIFY		19
 
 /*
-** Sent on changes to a window's state, such as size, position, border, and stacking order
+** Sent on changes to a window's state,
+** such as size, position, border, and stacking order.
 */
 # define EVENT_CONFIGURE_NOTIFY	22
 
 /*
-** Sent on client XSendEvent call (X press)
+** Sent on client XSendEvent call (X press).
 */
 # define EVENT_CLIENT_MESSAGE	33
 
 /*
 ** === MASKS ===
 */
-# define MASK_KEY_PRESS			(1ul << 0u)
-# define MASK_KEY_RELEASE		(1ul << 1u)
-# define MASK_BUTTON_PRESS		(1ul << 2u)
-# define MASK_BUTTON_RELEASE	(1ul << 3u)
-# define MASK_POINTER_MOTION	(1ul << 6u)
-# define MASK_EXPOSE			(1ul << 15u)
-
-/*
-** Used to receive CONFIGURE_NOTIFY, DESTROY_NOTIFY, MAP_NOTIFY, UNMAP_NOTIFY and others
-*/
-# define MASK_STRUCTURE_NOTIFY	(1ul << 17)
+enum			e_masks
+{
+	NO_EVENT_MASK = (0L),
+	KEY_PRESS_MASK = (1L << 0),
+	KEY_RELEASE_MASK = (1L << 1),
+	BUTTON_PRESS_MASK = (1L << 2),
+	BUTTON_RELEASE_MASK = (1L << 3),
+	ENTER_WINDOW_MASK = (1L << 4),
+	LEAVE_WINDOW_MASK = (1L << 5),
+	POINTER_MOTION_MASK = (1L << 6),
+	POINTER_MOTION_HINT_MASK = (1L << 7),
+	BUTTON1_MOTION_MASK = (1L << 8),
+	BUTTON2_MOTION_MASK = (1L << 9),
+	BUTTON3_MOTION_MASK = (1L << 10),
+	BUTTON4_MOTION_MASK = (1L << 11),
+	BUTTON5_MOTION_MASK = (1L << 12),
+	BUTTON_MOTION_MASK = (1L << 13),
+	KEYMAP_STATE_MASK = (1L << 14),
+	EXPOSURE_MASK = (1L << 15),
+	VISIBILITY_CHANGE_MASK = (1L << 16),
+	STRUCTURE_NOTIFY_MASK = (1L << 17),
+	RESIZE_REDIRECT_MASK = (1L << 18),
+	SUBSTRUCTURE_NOTIFY_MASK = (1L << 19),
+	SUBSTRUCTURE_REDIRECT_MASK = (1L << 20),
+	FOCUS_CHANGE_MASK = (1L << 21),
+	PROPERTY_CHANGE_MASK = (1L << 22),
+	COLORMAP_CHANGE_MASK = (1L << 23),
+	OWNER_GRAB_BUTTON_MASK = (1L << 24),
+};
 
 /*
 ** === KEYCODES ===
