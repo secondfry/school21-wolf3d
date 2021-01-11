@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 09:08:02 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 10:50:38 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,23 @@
 
 typedef int			(*t_mlx_hook)();
 
+typedef struct		s_point
+{
+	unsigned short	x;
+	unsigned short	y;
+}					t_point;
+
+typedef struct		s_wall
+{
+	t_point			prev;
+	t_point			next;
+}					t_wall;
+
 typedef struct		s_player
 {
-	int				pos_x;
-	int				pos_y;
+	t_point			pos;
+	float			angle;
+	t_wall			wall;
 }					t_player;
 
 typedef struct		s_mlx
@@ -53,6 +66,9 @@ typedef struct		s_wolf
 	t_player		*player;
 	t_byte			options;
 	t_byte			flags;
+	t_byte			map_width;
+	t_byte			map_height;
+	char			*map;
 }					t_wolf;
 
 # define FLAG_REDRAW				(1u << 0u)

@@ -6,7 +6,7 @@
 #    By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/01/06 18:17:57 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/01/11 10:49:02 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,7 @@ LIB = libft.a
 LIB_DIR = ./libft
 
 SRC_FILES =	main.c \
-			init_mlx.c loop_hook_1.c
+			init_mlx.c loop_hook_1.c loop_hook_2.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))
 OBJS = $(patsubst $(SRCS_DIR)/%.c,$(OBJS_DIR)/%.o, $(SRCS))
