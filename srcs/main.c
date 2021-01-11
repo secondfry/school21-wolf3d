@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:52:15 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 10:48:30 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/11 13:18:10 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,8 @@ void	init_wolf(t_wolf *wolf)
 	// wolf->options = ;
 }
 
-int		main(void) {
+int		main(void)
+{
 	t_wolf		wolf;
 	t_mlx		mlx;
 	t_player	player;

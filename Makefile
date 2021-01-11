@@ -6,7 +6,7 @@
 #    By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/01/11 10:49:02 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/01/11 13:46:23 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -74,7 +74,7 @@ CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 				$(CFLAGS_PLATFORM) $(CFLAGS_INTERNAL) \
 				$(CFLAGS)
 
-LDFLAGS +=	-L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx
+LDFLAGS += -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx
 
 LDFLAGS_ASAN = -fsanitize=address
 
