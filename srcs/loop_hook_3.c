@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 14:59:41 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 18:22:11 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/22 18:52:06 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ void	loop_render_debug(t_wolf *wolf)
 		ft_itoa(wolf->player->wall.next.x));
 	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 80, 50, 0xfffff,
 		ft_itoa(wolf->player->wall.next.y));
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 10, 60, 0xfffff, "Angle:");
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 50, 60, 0xfffff,
+		ft_itoa(wolf->player->angle));
 }
 
 void	move(t_wolf *wolf, char direction)
@@ -41,7 +44,7 @@ void	strafe(t_wolf *wolf, char direction)
 
 void	rotate(t_wolf *wolf, char direction)
 {
-	wolf->player->angle += direction;
+	wolf->player->angle += 3 * direction;
 	if (wolf->player->angle > 180)
 		wolf->player->angle -= 360;
 	if (wolf->player->angle < -180)

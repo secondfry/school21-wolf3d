@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/06 15:58:36 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 16:45:07 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/22 19:27:18 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@
 # define SSIZE_T_MIN (SSIZE_T_MAX + 1ul)
 # define EPSILON 0.001f
 # define WALL_HEIGHT 64
-# define FOV 60
+# define FOV 110
 
-# if FOV == 0 || FOV > 179
+# if FOV < 1 || FOV > 135
 #  undef FOV
-#  define FOV 60
+#  define FOV 110
 # endif
 
 # define EINVAL 22
@@ -41,8 +41,8 @@ typedef int			(*t_mlx_hook)();
 
 typedef struct		s_point
 {
-	unsigned short	x;
-	unsigned short	y;
+	float			x;
+	float			y;
 }					t_point;
 
 typedef struct		s_wall

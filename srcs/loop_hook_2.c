@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 10:39:04 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 18:20:43 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/22 19:08:37 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,8 @@ void	loop_invalidate_position(t_wolf *wolf)
 {
 	if (!(wolf->flags & FLAG_INVALIDATE_POSITION))
 		return ;
-	wolf->player->wall.prev.x = wolf->player->pos.x - wolf->player->pos.x % 64;
-	wolf->player->wall.prev.y = wolf->player->pos.y - wolf->player->pos.y % 64;
+	wolf->player->wall.prev.x = (int) wolf->player->pos.x - (int) wolf->player->pos.x % 64;
+	wolf->player->wall.prev.y = (int) wolf->player->pos.y - (int) wolf->player->pos.y % 64;
 	wolf->player->wall.next.x = wolf->player->wall.prev.x + 64;
 	wolf->player->wall.next.y = wolf->player->wall.prev.y + 64;
 	wolf->flags -= FLAG_INVALIDATE_POSITION;
@@ -38,15 +38,17 @@ void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col
 
 	point.x = point.x;
 	angle = angle;
-	// distance = distance * cosf((angle - wolf->player->angle) * M_PI_F / 180);
-	wall_height = WALL_HEIGHT * wolf->projection_distance / distance / 4;
+	float dangle = angle - wolf->player->angle;
+	float multiplicator = cosf(dangle * M_PI_F / 180);
+	float distance_corrected = distance * multiplicator;
+	wall_height = WALL_HEIGHT * wolf->projection_distance / distance_corrected / 4;
 
 	short start = (HEIGHT - wall_height) / 2;
 	start = start < 0 ? 0 : start;
 	short end = (HEIGHT + wall_height) / 2;
 	end = end > HEIGHT ? HEIGHT : end;
 	for (int v = start; v < end; v++) {
-		wolf->mlx->img_data[v * wolf->mlx->size_line_int + col] = 0xfffff;
+		wolf->mlx->img_data[v * wolf->mlx->size_line_int + col] = 0xff00000;
 	}
 	return ;
 }
@@ -62,9 +64,13 @@ void	loop_redraw(t_wolf *wolf)
 	if (!(wolf->flags & FLAG_REDRAW))
 		return ;
 	ft_bzero(wolf->mlx->img_data, wolf->mlx->size_line_char * HEIGHT);
-	// wolf->flags -= FLAG_REDRAW;
+	wolf->flags -= FLAG_REDRAW;
 	for (int col = 0; col < WIDTH; col++) {
 		angle = wolf->player->angle + ((float)col) * FOV / WIDTH - FOV / 2;
+		while (angle < -180)
+			angle += 360;
+		while (angle > 180)
+			angle -= 360;
 		if (angle > -90 && angle < 90)
 			hor = intersection_horizontal(wolf, angle, wolf->player->wall.prev.y - 1);
 		else

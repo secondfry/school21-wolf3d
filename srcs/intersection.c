@@ -6,7 +6,7 @@
 /*   By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/11 16:03:51 by oadhesiv          #+#    #+#             */
-/*   Updated: 2021/01/11 17:34:21 by oadhesiv         ###   ########.fr       */
+/*   Updated: 2021/01/22 18:51:24 by oadhesiv         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ t_point	intersection_horizontal(
 	unsigned short wall_y
 )
 {
-	short			dy;
-	short			dx;
-	unsigned short	wall_x;
+	float			dy;
+	float			dx;
+	float			wall_x;
 	t_byte			check;
 
 	if ((angle < 90 + EPSILON && angle > 90 + -1 * EPSILON)
@@ -49,8 +49,14 @@ t_point	intersection_horizontal(
 	
 	while (1)
 	{
-		wall_y -= 64; // FIXME blyat 
-		wall_x += 64 * tanf(angle * M_PI_F / 180);
+		if (angle > -90 && angle < 90)
+			wall_y -= 64;
+		else
+			wall_y += 64;
+		if (angle > 0 && angle < 180)
+			wall_x += 64 * fabsf(tanf(angle * M_PI_F / 180));
+		else
+			wall_x -= 64 * fabsf(tanf(angle * M_PI_F / 180));
 		check = is_wall(wolf, wall_x, wall_y);
 		if (check == 1)
 			return ((t_point){wall_x, wall_y});
@@ -65,9 +71,9 @@ t_point	intersection_vertical(
 	unsigned short wall_x
 )
 {
-	short			dy;
-	short			dx;
-	unsigned short	wall_y;
+	float			dy;
+	float			dx;
+	float			wall_y;
 	t_byte			check;
 
 	if ((angle < EPSILON && angle > -1 * EPSILON)
@@ -85,8 +91,14 @@ t_point	intersection_vertical(
 
 	while (1)
 	{
-		wall_x += 64; // FIXME blyat
-		wall_y -= 64 * tanf(angle * M_PI_F / 180);
+		if (angle > 0 && angle < 180)
+			wall_x += 64;
+		else
+			wall_x -= 64;
+		if (angle > -90 && angle < 90)
+			wall_y -= 64 / fabsf(tanf(angle * M_PI_F / 180));
+		else
+			wall_y += 64 / fabsf(tanf(angle * M_PI_F / 180));
 		check = is_wall(wolf, wall_x, wall_y);
 		if (check == 1)
 			return ((t_point){wall_x, wall_y});
