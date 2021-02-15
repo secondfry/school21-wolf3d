@@ -37,7 +37,7 @@ void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col
 	short	wall_height;
 
 	point.x = point.x;
-	angle = angle;
+	angle = angle + 0;
 	float dangle = angle - wolf->player->angle;
 	float multiplicator = cosf(dangle * M_PI_F / 180);
 	float distance_corrected = distance * multiplicator;

@@ -38,7 +38,7 @@ void	move(t_wolf *wolf, char direction)
 void	strafe(t_wolf *wolf, char direction)
 {
 	*wolf = *wolf;
-	direction = direction;
+	direction = direction + 0;
 	wolf->flags |= FLAG_INVALIDATE_POSITION;
 }
 

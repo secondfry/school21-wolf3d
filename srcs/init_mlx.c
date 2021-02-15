@@ -19,7 +19,9 @@ void	init_mlx(t_mlx *mlx)
 	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, TITLE);
 	if (!mlx->win)
 	{
+#ifndef MLX_MACOS_METAL
 		mlx_destroy_display(mlx->mlx);
+#endif
 		ft_ptr_check(mlx->win, "[main] mlx_new_window errored.", 1, mlx->mlx);
 	}
 }
@@ -33,8 +35,10 @@ void	init_mlx_image(t_mlx *mlx)
 	mlx->img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
 	if (!mlx->img)
 	{
+#ifndef MLX_MACOS_METAL
 		mlx_destroy_window(mlx->mlx, mlx->win);
 		mlx_destroy_display(mlx->mlx);
+#endif
 		ft_ptr_check(mlx->img, "[main] mlx_new_image errored.", 1, mlx->mlx);
 	}
 	mlx->img_data = (int *)mlx_get_data_addr(
@@ -46,8 +50,10 @@ void	init_mlx_image(t_mlx *mlx)
 void	clear_mlx(t_mlx *mlx)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img);
+#ifndef MLX_MACOS_METAL
 	mlx_destroy_window(mlx->mlx, mlx->win);
 	mlx_destroy_display(mlx->mlx);
+#endif
 	ft_memdel(&(mlx->mlx));
 }
 

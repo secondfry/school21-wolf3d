@@ -51,7 +51,7 @@ else
 		VER := $(shell test $(UNAME_R) -ge 17 && echo 'new' || echo 'old')
 		ifeq ($(VER),new)
 			MLX = libmlx.dylib
-			MLX_DIR = ./minilibx_mms_20191025_beta
+			MLX_DIR = ./minilibx_mms_20200219
 			CFLAGS_PLATFORM = -D MLX_MACOS_METAL
 		endif
 		ifeq ($(VER),old)
@@ -150,7 +150,7 @@ fclean_libs: clean_libs
 fclean_self: clean_self
 	@echo $(CYAN) "Purging wolf3d" $(DEFAULT)
 	@echo -n $(GREEN)
-	rm -rv $(NAME)
+	rm -rfv $(NAME)
 	@echo -n $(DEFAULT)
 
 debug: clean_self

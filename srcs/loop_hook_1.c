@@ -24,7 +24,9 @@ int		loop_hook(t_wolf *wolf)
 
 int		loop_destroy_hook(t_wolf *wolf)
 {
+#ifndef MLX_MACOS_METAL
 	mlx_loop_end(wolf->mlx->mlx);
+#endif
 	clear_mlx(wolf->mlx);
 	ft_putendl("Goodbye!");
 	exit(0);
