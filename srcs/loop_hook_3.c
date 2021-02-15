@@ -14,18 +14,25 @@
 
 void	loop_render_debug(t_wolf *wolf)
 {
+	char *str;
+
 	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 10, 35, 0xfffff, "Walls:");
-	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 70, 20, 0xfffff,
-		ft_itoa(wolf->player->wall.prev.x));
-	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 60, 30, 0xfffff,
-		ft_itoa(wolf->player->wall.prev.y));
-	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 90, 40, 0xfffff,
-		ft_itoa(wolf->player->wall.next.x));
-	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 80, 50, 0xfffff,
-		ft_itoa(wolf->player->wall.next.y));
+	str = ft_itoa(wolf->player->wall.prev.x);
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 70, 20, 0xfffff, str);
+	ft_memdel((void**)&str);
+	str = ft_itoa(wolf->player->wall.prev.y);
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 60, 30, 0xfffff, str);
+	ft_memdel((void**)&str);
+	str = ft_itoa(wolf->player->wall.next.x);
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 90, 40, 0xfffff, str);
+	ft_memdel((void**)&str);
+	str = ft_itoa(wolf->player->wall.next.y);
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 80, 50, 0xfffff, str);
+	ft_memdel((void**)&str);
 	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 10, 60, 0xfffff, "Angle:");
-	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 50, 60, 0xfffff,
-		ft_itoa(wolf->player->angle));
+	str = ft_itoa(wolf->player->angle);
+	mlx_string_put(wolf->mlx->mlx, wolf->mlx->win, 50, 60, 0xfffff, str);
+	ft_memdel((void**)&str);
 }
 
 void	move(t_wolf *wolf, char direction)
