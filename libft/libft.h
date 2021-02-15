@@ -72,7 +72,7 @@
 /*
 ** Including `string.h` as norminette doesn't like size_t typedef
 */
-# ifdef __unix__
+# if defined(__unix__) || defined(__APPLE__)
 #  include <string.h>
 # elif defined(_WIN32) || defined(_WIN64)
 #  include <cstring>
