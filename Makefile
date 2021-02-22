@@ -6,7 +6,7 @@
 #    By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/02/22 16:57:46 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/02/22 17:09:43 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -155,6 +155,13 @@ fclean_self: clean_self
 
 debug: clean_self
 	CFLAGS_INTERNAL="$(CFLAGS_DEBUG)" $(MAKE) all
+
+debug_wsl:
+	@echo "Don't forget to run on Windows host:"
+	@echo '"C:\\Program Files\\VcXsrv\\vcxsrv.exe" :0 -ac -terminate -lesspointer -multiwindow -clipboard -wgl -dpi auto'
+	@echo "Press any key to continue..."
+	@read
+	$(MAKE) debug
 
 debug_all: clean_self clean_libs
 	CFLAGS_INTERNAL="$(CFLAGS_DEBUG)" $(MAKE) all
