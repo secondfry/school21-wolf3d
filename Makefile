@@ -6,7 +6,7 @@
 #    By: oadhesiv <oadhesiv@student.21-school.ru>   +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/29 13:58:56 by oadhesiv          #+#    #+#              #
-#    Updated: 2021/01/11 16:06:07 by oadhesiv         ###   ########.fr        #
+#    Updated: 2021/02/22 16:57:46 by oadhesiv         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ else
 	UNAME_S := $(shell uname -s)
 	ifeq ($(UNAME_S),Linux)
 		ifeq ($(origin CC), default)
-		CC = gcc
+			CC = clang
 		endif
 
 		MLX = libmlx.a
@@ -44,7 +44,7 @@ else
 	endif
 	ifeq ($(UNAME_S),Darwin)
 		ifeq ($(origin CC), default)
-		CC = clang
+			CC = clang
 		endif
 
 		UNAME_R := $(shell uname -r | cut -d. -f1)
@@ -85,7 +85,7 @@ GREEN = "\033[0;32m"
 BLUE = "\033[0;34m"
 CYAN = "\033[0;36m"
 
-.PHONY: all clean clean_libs clean_self fclean fclean_libs fclean_self debug debug_all asan asan_all re
+.PHONY: all clean clean_libs clean_self fclean fclean_libs fclean_self debug debug_all asan asan_all re prepare_ubuntu
 
 all:
 	@echo $(CYAN) "Making libft" $(DEFAULT)
@@ -168,3 +168,7 @@ asan_all: clean_self clean_libs
 	$(MAKE) all
 
 re: fclean all
+
+prepare_ubuntu:
+	sudo apt update
+	sudo apt install zsh clang lldb libx11-dev libxext-dev libbsd-dev gdb -y
