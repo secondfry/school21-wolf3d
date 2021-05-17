@@ -17,5 +17,6 @@
 # include "defines.h"
 # include "init_mlx.h"
 # include "texture.h"
+# include "parser.h"
 
 #endif

@@ -70,9 +70,6 @@ void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col
 
 	for (int v = start; v < end; v++) {
 		int tex_vert = (end - v) * 64 / wall_height;
-
-		
-
 		wolf->mlx->img_data[v * wolf->mlx->size_line_int + col] = wolf->texture[wall_idx][tex_vert * 64 + texpos];
 	}
 	return ;

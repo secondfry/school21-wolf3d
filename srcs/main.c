@@ -29,12 +29,26 @@ void	init_wolf(t_wolf *wolf)
 	wolf->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 
-int		main(void)
+int		main(int argc, char *argv[])
 {
 	t_wolf		wolf;
 	t_mlx		mlx;
 	t_player	player;
+	char		*buf;
+	int		fd;
 
+	if (argc != 2)
+	{
+		ft_putendl("\nUsage: \n$ ./wolf3d maps/map\n");
+		return (0);
+	}
+	fd = open(argv[1], O_RDONLY);
+	if ((buf = malloc(10000001 * sizeof(char))) == NULL)
+	{
+		ft_putendl("Memory allocated error, no space left\n");
+		return (1);
+	}		
+	
 	init_player(&player);
 	wolf.player = &player;
 	init_mlx(&mlx);
