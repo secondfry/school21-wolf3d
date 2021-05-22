@@ -15,6 +15,8 @@
 
 # include "libft.h"
 
+# define BUF_SIZE 10000000
+# define BUF_SIZE_PLUS_ONE 10000001
 # define WIDTH 1280
 # define HEIGHT 720
 # define TITLE "wolf3d"

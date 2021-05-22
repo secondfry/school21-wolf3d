@@ -18,5 +18,7 @@
 # include "init_mlx.h"
 # include "texture.h"
 # include "parser.h"
+# include <fcntl.h>
+# include <unistd.h>
 
 #endif
