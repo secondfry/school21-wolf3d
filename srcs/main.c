@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "main.h"
+#include "parser.h"
 
 void	init_player(t_player *player)
 {
@@ -25,7 +26,7 @@ void	init_wolf(t_wolf *wolf)
 		| FLAG_REDRAW;
 	wolf->map_width = 7;
 	wolf->map_height = 7;
-	wolf->map = "1111111100000110000011000001100000110000011111111";
+	//wolf->map = "1111111100000110000011000001100000110000011111111";
 	wolf->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 
@@ -34,8 +35,7 @@ int		main(int argc, char *argv[])
 	t_wolf		wolf;
 	t_mlx		mlx;
 	t_player	player;
-	char		*buf;
-	int		fd;
+	int			fd;
 
 	if (argc != 2)
 	{
@@ -43,12 +43,13 @@ int		main(int argc, char *argv[])
 		return (0);
 	}
 	fd = open(argv[1], O_RDONLY);
-	if ((buf = malloc(10000001 * sizeof(char))) == NULL)
-	{
-		ft_putendl("Memory allocated error, no space left\n");
-		return (1);
-	}		
-	
+	if (fd < 3)
+		error_exit(15);
+	argc = read(fd, NULL, 0);
+	if (argc != 0)
+		error_exit(25);
+	if (parser(&wolf, fd) == -1)
+		error_exit(0);
 	init_player(&player);
 	wolf.player = &player;
 	init_mlx(&mlx);
