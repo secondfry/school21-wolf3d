@@ -51,16 +51,16 @@ void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col
 	t_byte wall_idx;
 
 	if (wolf->player->pos.y < point.y && isvert == 0)
-		wall_idx = TEX_NORTH;
+		wall_idx = TEX_SOUTH;
 
 	if (wolf->player->pos.y > point.y && isvert == 0)
-		wall_idx = TEX_EAST;
-
-	if (wolf->player->pos.x > point.x && isvert == 1)
-		wall_idx = TEX_SOUTH;
+		wall_idx = TEX_NORTH;
 
 	if (wolf->player->pos.x > point.x && isvert == 1)
 		wall_idx = TEX_WEST;
+
+	if (wolf->player->pos.x < point.x && isvert == 1)
+		wall_idx = TEX_EAST;
 
 	if (wolf->player->pos.y < point.y && isvert == 0)
 		texpos = 64 - texpos;
@@ -69,7 +69,7 @@ void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col
 		texpos = 64 - texpos;
 
 	for (int v = start; v < end; v++) {
-		int tex_vert = (v - start) * 64 / wall_height;
+		int tex_vert = (end - v) * 64 / wall_height;
 
 		
 
