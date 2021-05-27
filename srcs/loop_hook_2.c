@@ -104,7 +104,11 @@ void	loop_redraw(t_wolf *wolf)
 			ver = intersection_vertical(wolf, angle, wolf->player->wall.next.x);
 		else
 			ver = intersection_vertical(wolf, angle, wolf->player->wall.prev.x - 1);
-		dh = (hor.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
+		
+		if (angle == 0 || angle == 180 || angle == -180)
+			dh = fabsf(hor.y - wolf->player->pos.y);
+		else
+			dh = (hor.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
 		dv = (ver.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
 		if (hor.x == 0 && hor.y == 0)
 			draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1);

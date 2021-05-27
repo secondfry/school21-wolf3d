@@ -34,8 +34,8 @@ t_point	intersection_horizontal(
 	float			wall_x;
 	t_byte			check;
 
-	if ((angle < 90 + EPSILON && angle > 90 + -1 * EPSILON)
-		|| (angle < -90 + EPSILON && angle > -90 + -1 * EPSILON))
+	if ((90 - EPSILON < angle && angle < 90 + EPSILON)
+		|| (-90 - EPSILON < angle && angle < -90 + EPSILON))
 		return ((t_point){0, 0});
 	
 	dy = wolf->player->pos.y - wall_y;
@@ -76,8 +76,9 @@ t_point	intersection_vertical(
 	float			wall_y;
 	t_byte			check;
 
-	if ((angle < EPSILON && angle > -1 * EPSILON)
-		|| (angle < -180 + EPSILON && angle > 180 + -1 * EPSILON))
+	if ((-EPSILON < angle && angle < EPSILON)
+		|| (-180 - EPSILON < angle && angle < -180 + EPSILON)
+		|| (180 - EPSILON < angle && angle < 180 + EPSILON))
 		return ((t_point){0, 0});
 
 	dx = wolf->player->pos.x - wall_x;
