@@ -32,7 +32,7 @@ void	loop_invalidate_rotation(t_wolf *wolf)
 	wolf->flags |= FLAG_REDRAW;
 }
 
-void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col)
+void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col, int texpos, _Bool isvert)
 {
 	short	wall_height;
 
@@ -47,8 +47,33 @@ void	draw_wall(t_wolf *wolf, t_point point, float angle, float distance, int col
 	start = start < 0 ? 0 : start;
 	short end = (HEIGHT + wall_height) / 2;
 	end = end > HEIGHT ? HEIGHT : end;
+
+	t_byte wall_idx;
+
+	if (wolf->player->pos.y < point.y && isvert == 0)
+		wall_idx = TEX_NORTH;
+
+	if (wolf->player->pos.y > point.y && isvert == 0)
+		wall_idx = TEX_EAST;
+
+	if (wolf->player->pos.x > point.x && isvert == 1)
+		wall_idx = TEX_SOUTH;
+
+	if (wolf->player->pos.x > point.x && isvert == 1)
+		wall_idx = TEX_WEST;
+
+	if (wolf->player->pos.y < point.y && isvert == 0)
+		texpos = 64 - texpos;
+
+	if (wolf->player->pos.x > point.x && isvert == 1)
+		texpos = 64 - texpos;
+
 	for (int v = start; v < end; v++) {
-		wolf->mlx->img_data[v * wolf->mlx->size_line_int + col] = 0xff00000;
+		int tex_vert = (v - start) * 64 / wall_height;
+
+		
+
+		wolf->mlx->img_data[v * wolf->mlx->size_line_int + col] = wolf->texture[wall_idx][tex_vert * 64 + texpos];
 	}
 	return ;
 }
@@ -82,12 +107,12 @@ void	loop_redraw(t_wolf *wolf)
 		dh = (hor.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
 		dv = (ver.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
 		if (hor.x == 0 && hor.y == 0)
-			draw_wall(wolf, ver, angle, dv, col);
+			draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1);
 		if (ver.x == 0 && ver.y == 0)
-			draw_wall(wolf, hor, angle, dh, col);
+			draw_wall(wolf, hor, angle, dh, col, ((int)hor.x) % 64, 0);
 		dh > dv
-			? draw_wall(wolf, ver, angle, dv, col)
-			: draw_wall(wolf, hor, angle, dh, col);
+			? draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1)
+			: draw_wall(wolf, hor, angle, dh, col, ((int)hor.x) % 64, 0);
 	}
 	mlx_put_image_to_window(wolf->mlx->mlx, wolf->mlx->win, wolf->mlx->img, 0, 0);
 }

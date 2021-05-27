@@ -31,7 +31,7 @@
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
-      "MIMode": "gdb",
+      "MIMode": "lldb",
       "setupCommands": [
         {
           "description": "Enable pretty-printing for gdb",
