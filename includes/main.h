@@ -16,5 +16,6 @@
 # include <mlx.h>
 # include "defines.h"
 # include "init_mlx.h"
+# include "texture.h"
 
 #endif

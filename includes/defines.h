@@ -28,11 +28,11 @@
 # define SSIZE_T_MIN (SSIZE_T_MAX + 1ul)
 # define EPSILON 0.001f
 # define WALL_HEIGHT 64
-# define FOV 110
+# define FOV 60
 
 # if FOV < 1 || FOV > 135
 #  undef FOV
-#  define FOV 110
+#  define FOV 60
 # endif
 
 # define EINVAL 22
@@ -78,6 +78,7 @@ typedef struct		s_wolf
 	t_byte			map_height;
 	char			*map;
 	float			projection_distance;
+	int				*texture[4];
 }					t_wolf;
 
 enum			e_flags
@@ -198,5 +199,15 @@ enum			e_masks
 # define MOUSE_2			2
 # define MOUSE_WHEEL_OUT	5
 # define MOUSE_WHEEL_IN		4
+
+# define TEX_NORTH	0
+# define TEX_EAST	1
+# define TEX_SOUTH	2
+# define TEX_WEST	3
+
+# define TEX_NORTH_FILENAME	"./textures/n_cat.bmp"
+# define TEX_EAST_FILENAME	"./textures/e_cat.bmp"
+# define TEX_SOUTH_FILENAME	"./textures/s_kus.bmp"
+# define TEX_WEST_FILENAME	"./textures/w_fish.bmp"
 
 #endif

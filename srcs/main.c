@@ -41,6 +41,7 @@ int		main(void)
 	init_mlx_image(&mlx);
 	wolf.mlx = &mlx;
 	init_wolf(&wolf);
+	init_textures(&wolf);
 	init_mlx_hooks(&wolf);
 
 	// input(&fdf, argv[argc - 1]);
