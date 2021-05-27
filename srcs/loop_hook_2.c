@@ -91,7 +91,7 @@ void	loop_redraw(t_wolf *wolf)
 	ft_bzero(wolf->mlx->img_data, wolf->mlx->size_line_char * HEIGHT);
 	wolf->flags -= FLAG_REDRAW;
 	for (int col = 0; col < WIDTH; col++) {
-		angle = wolf->player->angle + ((float)col) * FOV / WIDTH - FOV / 2;
+		angle = wolf->player->angle + (float) col * (float) FOV / (float) WIDTH - FOV / 2;
 		while (angle < -180)
 			angle += 360;
 		while (angle > 180)
@@ -105,11 +105,15 @@ void	loop_redraw(t_wolf *wolf)
 		else
 			ver = intersection_vertical(wolf, angle, wolf->player->wall.prev.x - 1);
 		
-		if (angle == 0 || angle == 180 || angle == -180)
-			dh = fabsf(hor.y - wolf->player->pos.y);
-		else
-			dh = (hor.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
-		dv = (ver.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
+		dh = sqrtf(powf(hor.y - wolf->player->pos.y, 2) + powf(hor.x - wolf->player->pos.x, 2));
+		dv = sqrtf(powf(ver.y - wolf->player->pos.y, 2) + powf(ver.x - wolf->player->pos.x, 2));
+
+		// if (angle == 0 || angle == 180 || angle == -180)
+		// 	dh = fabsf(hor.y - wolf->player->pos.y);
+		// else
+		// 	dh = (hor.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
+		// dv = (ver.x - wolf->player->pos.x) / sinf(angle * M_PI_F / 180);
+
 		if (hor.x == 0 && hor.y == 0)
 			draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1);
 		if (ver.x == 0 && ver.y == 0)
