@@ -27,6 +27,18 @@ void	init_wolf(t_wolf *wolf)
 	wolf->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 
+void	check_defines(void)
+{
+	if (FOV < 1 || FOV > 360)
+		error_exit(ERR_INVALID_DEFINE);
+	if (WIDTH < 240 || WIDTH > 1920)
+		error_exit(ERR_INVALID_DEFINE);
+	if (HEIGHT < 240 || HEIGHT > 1080)
+		error_exit(ERR_INVALID_DEFINE);
+	if (HEIGHT_COEF < 0.1 || HEIGHT_COEF > 4)
+		error_exit(ERR_INVALID_DEFINE);
+}
+
 int		main(int argc, char *argv[])
 {
 	t_wolf		wolf;
@@ -35,6 +47,7 @@ int		main(int argc, char *argv[])
 	int			fd;
 	int			res;
 
+	check_defines();
 	if (argc != 2)
 	{
 		ft_putendl("\nUsage: \n$ ./wolf3d maps/map\n");

@@ -24,6 +24,8 @@ void    error_exit(int c)
 		ft_putendl_fd("Player position is blocked on the map.", 2);
 	if (c == ERR_MAP_SMOL)
 		ft_putendl_fd("Map is less than 3x3.", 2);
+	if (c == ERR_INVALID_DEFINE)
+		ft_putendl_fd("Invalid defines.", 2);
 	exit(c);
 }
 

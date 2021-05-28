@@ -17,8 +17,8 @@
 
 # define BUF_SIZE 1000000
 # define BUF_SIZE_PLUS_ONE 1000001
-# define WIDTH 1280
-# define HEIGHT 720
+# define WIDTH 640
+# define HEIGHT 480
 # define TITLE "wolf3d"
 # define M_LN2_F 0.693147180559945309417232121458176568f
 # define M_PI_F 3.14159265358979323846264338327950288f
@@ -31,11 +31,7 @@
 # define EPSILON 0.001f
 # define WALL_HEIGHT 64
 # define FOV 60
-
-# if FOV < 1 || FOV > 135
-#  undef FOV
-#  define FOV 60
-# endif
+# define HEIGHT_COEF 1.5
 
 # define EINVAL 22
 
@@ -223,5 +219,6 @@ enum			e_masks
 # define ERR_MAP_INVALID_HEIGHT				7
 # define ERR_MAP_BLOCKED_PLAYER				8
 # define ERR_MAP_SMOL						9
+# define ERR_INVALID_DEFINE					10
 
 #endif
