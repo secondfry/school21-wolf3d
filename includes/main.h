@@ -13,12 +13,13 @@
 #ifndef MAIN_H
 # define MAIN_H
 
+# include <fcntl.h>
+# include <unistd.h>
 # include <mlx.h>
 # include "defines.h"
 # include "init_mlx.h"
 # include "texture.h"
 # include "parser.h"
-# include <fcntl.h>
-# include <unistd.h>
+# include "error.h"
 
 #endif

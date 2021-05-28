@@ -12,7 +12,7 @@
 
 #include "intersection.h"
 
-t_byte	is_wall(t_wolf *wolf, unsigned short x, unsigned short y)
+static t_byte	is_wall(t_wolf *wolf, unsigned short x, unsigned short y)
 {
 	x /= 64;
 	y /= 64;

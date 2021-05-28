@@ -39,15 +39,11 @@ void	check_defines(void)
 		error_exit(ERR_INVALID_DEFINE);
 }
 
-int		main(int argc, char *argv[])
+int	check_args(int argc, char **argv)
 {
-	t_wolf		wolf;
-	t_mlx		mlx;
-	t_player	player;
-	int			fd;
-	int			res;
+	int	fd;
+	int	res;
 
-	check_defines();
 	if (argc != 2)
 	{
 		ft_putendl("\nUsage: \n$ ./wolf3d maps/map\n");
@@ -59,6 +55,18 @@ int		main(int argc, char *argv[])
 	res = read(fd, NULL, 0);
 	if (res != 0)
 		error_exit(ERR_READ);
+	return (fd);
+}
+
+int	main(int argc, char **argv)
+{
+	t_wolf		wolf;
+	t_mlx		mlx;
+	t_player	player;
+	int			fd;
+
+	check_defines();
+	fd = check_args(argc, argv);
 	parser(&wolf, fd);
 	init_player(&player);
 	wolf.player = &player;
@@ -68,9 +76,6 @@ int		main(int argc, char *argv[])
 	init_wolf(&wolf);
 	init_textures(&wolf);
 	init_mlx_hooks(&wolf);
-
-	// input(&fdf, argv[argc - 1]);
-	
 	mlx_loop(mlx.mlx);
 	return (0);
 }

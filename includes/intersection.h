@@ -16,7 +16,6 @@
 # include <math.h>
 # include "defines.h"
 
-t_byte	is_wall(t_wolf *wolf, unsigned short x, unsigned short y);
 t_point	intersection_horizontal(t_wolf *wolf, float angle, float wall_y);
 t_point	intersection_vertical(t_wolf *wolf, float angle, float wall_x);
 

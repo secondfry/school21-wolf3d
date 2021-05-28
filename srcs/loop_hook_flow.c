@@ -12,7 +12,7 @@
 
 #include "loop_hook.h"
 
-int		loop_hook(t_wolf *wolf)
+int	loop_hook(t_wolf *wolf)
 {
 	loop_invalidate_position(wolf);
 	loop_invalidate_rotation(wolf);
@@ -22,15 +22,26 @@ int		loop_hook(t_wolf *wolf)
 	return (0);
 }
 
-int		loop_destroy_hook(t_wolf *wolf)
+#ifdef MLX_LINUX
+
+int	loop_destroy_hook(t_wolf *wolf)
 {
-#ifndef MLX_MACOS_METAL
 	mlx_loop_end(wolf->mlx->mlx);
-#endif
 	clear_mlx(wolf->mlx);
 	ft_putendl("Goodbye!");
 	exit(0);
 }
+
+#else
+
+int	loop_destroy_hook(t_wolf *wolf)
+{
+	clear_mlx(wolf->mlx);
+	ft_putendl("Goodbye!");
+	exit(0);
+}
+
+#endif
 
 void	loop_before_next_update(t_wolf *wolf)
 {

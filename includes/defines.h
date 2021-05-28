@@ -26,8 +26,6 @@
 # define M_PI_4F 0.785398163397448309615660845819875721f
 # define M_SQRT2_F 1.41421356237309504880168872420969808f
 # define M_SQRT1_2_F 0.707106781186547524400844362104849039f
-# define SSIZE_T_MAX ((0ul - 1ul) >> 1ul)
-# define SSIZE_T_MIN (SSIZE_T_MAX + 1ul)
 # define EPSILON 0.001f
 # define WALL_HEIGHT 64
 # define FOV 60
@@ -37,26 +35,26 @@
 
 typedef int			(*t_mlx_hook)();
 
-typedef struct		s_point
+typedef struct s_point
 {
 	float			x;
 	float			y;
 }					t_point;
 
-typedef struct		s_wall
+typedef struct s_wall
 {
 	t_point			prev;
 	t_point			next;
 }					t_wall;
 
-typedef struct		s_player
+typedef struct s_player
 {
 	t_point			pos;
 	float			angle;
 	t_wall			wall;
 }					t_player;
 
-typedef struct		s_mlx
+typedef struct s_mlx
 {
 	void			*mlx;
 	void			*win;
@@ -66,7 +64,7 @@ typedef struct		s_mlx
 	size_t			size_line_char;
 }					t_mlx;
 
-typedef struct		s_wolf
+typedef struct s_wolf
 {
 	t_mlx			*mlx;
 	t_player		*player;
@@ -76,14 +74,27 @@ typedef struct		s_wolf
 	t_byte			map_height;
 	char			*map;
 	float			projection_distance;
-	int				*texture[4];
+	int				*texture[9];
+	t_ushort		column;
+	t_ushort		wall_height;
 }					t_wolf;
 
-enum			e_flags
+enum	e_sizes
+{
+	SSIZE_T_MAX = ((0ul - 1ul) >> 1ul),
+	SSIZE_T_MIN = (SSIZE_T_MAX + 1ul),
+};
+
+enum	e_flags
 {
 	FLAG_REDRAW = (1u << 0u),
 	FLAG_INVALIDATE_POSITION = (1u << 1u),
 	FLAG_INVALIDATE_ROTATION = (1u << 2u),
+};
+
+enum	e_options
+{
+	OPTION_ART = (1u << 0u),
 };
 
 /*
@@ -203,10 +214,25 @@ enum			e_masks
 # define TEX_SOUTH	2
 # define TEX_WEST	3
 
-# define TEX_NORTH_FILENAME	"./textures/n_cat.bmp"
-# define TEX_EAST_FILENAME	"./textures/e_cat.bmp"
-# define TEX_SOUTH_FILENAME	"./textures/s_kus.bmp"
-# define TEX_WEST_FILENAME	"./textures/w_fish.bmp"
+# define TEX_ISAAC_NORTH	0
+# define TEX_ISAAC_EAST		1
+# define TEX_ISAAC_SOUTH	2
+# define TEX_ISAAC_WEST		3
+# define TEX_ERROR			4
+# define TEX_ART_NORTH		5
+# define TEX_ART_EAST		6
+# define TEX_ART_SOUTH		7
+# define TEX_ART_WEST		8
+
+# define TEX_ISAAC_NORTH_FILENAME	"./textures/n_basement.bmp"
+# define TEX_ISAAC_EAST_FILENAME	"./textures/e_caves.bmp"
+# define TEX_ISAAC_SOUTH_FILENAME	"./textures/s_chest.bmp"
+# define TEX_ISAAC_WEST_FILENAME	"./textures/w_cellar.bmp"
+# define TEX_ART_NORTH_FILENAME		"./textures/n_cat.bmp"
+# define TEX_ART_EAST_FILENAME		"./textures/e_cat.bmp"
+# define TEX_ART_SOUTH_FILENAME		"./textures/s_kus.bmp"
+# define TEX_ART_WEST_FILENAME		"./textures/w_fish.bmp"
+# define TEX_ERROR_FILENAME			"./textures/error.bmp"
 
 # define ERR_MEM							35
 # define ERR_READ							25

@@ -4,6 +4,8 @@
 		"defines.h": "c",
 		"init_mlx.h": "c",
 		"clear_mlx.h": "c",
-		"mlx.h": "c"
+		"mlx.h": "c",
+		"texture.h": "c",
+		"loop_hook.h": "c"
 	}
 }

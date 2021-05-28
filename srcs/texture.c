@@ -29,7 +29,7 @@ static int	*texture_read(int fd, size_t size)
 	return (ret);
 }
 
-int	*texture_load(char *filename)
+static int	*texture_load(char *filename)
 {
 	int		fd;
 	size_t	len;
@@ -38,10 +38,10 @@ int	*texture_load(char *filename)
 
 	fd = open(filename, O_RDONLY);
 	if (fd < 0)
-		exit(0);
+		error_exit(ERR_OPEN);
 	len = read(fd, header, 0);
 	if (len < 0)
-		exit(0);
+		error_exit(ERR_READ);
 	len = read(fd, header, 54);
 	if (len != 54)
 		exit(0);
@@ -52,8 +52,13 @@ int	*texture_load(char *filename)
 
 void	init_textures(t_wolf *wolf)
 {
-	wolf->texture[TEX_NORTH] = texture_load(TEX_NORTH_FILENAME);
-	wolf->texture[TEX_EAST] = texture_load(TEX_EAST_FILENAME);
-	wolf->texture[TEX_SOUTH] = texture_load(TEX_SOUTH_FILENAME);
-	wolf->texture[TEX_WEST] = texture_load(TEX_WEST_FILENAME);
+	wolf->texture[TEX_ISAAC_NORTH] = texture_load(TEX_ISAAC_NORTH_FILENAME);
+	wolf->texture[TEX_ISAAC_EAST] = texture_load(TEX_ISAAC_EAST_FILENAME);
+	wolf->texture[TEX_ISAAC_SOUTH] = texture_load(TEX_ISAAC_SOUTH_FILENAME);
+	wolf->texture[TEX_ISAAC_WEST] = texture_load(TEX_ISAAC_WEST_FILENAME);
+	wolf->texture[TEX_ERROR] = texture_load(TEX_ERROR_FILENAME);
+	wolf->texture[TEX_ART_NORTH] = texture_load(TEX_ART_NORTH_FILENAME);
+	wolf->texture[TEX_ART_EAST] = texture_load(TEX_ART_EAST_FILENAME);
+	wolf->texture[TEX_ART_SOUTH] = texture_load(TEX_ART_SOUTH_FILENAME);
+	wolf->texture[TEX_ART_WEST] = texture_load(TEX_ART_WEST_FILENAME);
 }

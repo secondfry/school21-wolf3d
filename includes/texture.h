@@ -6,8 +6,8 @@
 # include <stdlib.h>
 # include "libft.h"
 # include "defines.h"
+# include "error.h"
 
-int		*texture_load(char *filename);
 void	init_textures(t_wolf *wolf);
 
 #endif
