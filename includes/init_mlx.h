@@ -17,6 +17,7 @@
 # include <mlx.h>
 # include "defines.h"
 # include "loop_hook.h"
+# include "clear_mlx.h"
 
 void	init_mlx(t_mlx *mlx);
 void	init_mlx_image(t_mlx *mlx);

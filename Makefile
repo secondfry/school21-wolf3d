@@ -21,7 +21,8 @@ LIB = libft.a
 LIB_DIR = ./libft
 
 SRC_FILES =	main.c \
-			init_mlx.c loop_hook_1.c loop_hook_2.c loop_hook_3.c \
+			clear_mlx.c init_mlx.c init_mlx_2.c \
+			loop_hook_1.c loop_hook_2.c loop_hook_3.c \
 			intersection.c texture.c parser.c
 
 SRCS = $(addprefix $(SRCS_DIR)/, $(SRC_FILES))

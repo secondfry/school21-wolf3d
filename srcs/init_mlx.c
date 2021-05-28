@@ -19,29 +19,25 @@ void	init_mlx(t_mlx *mlx)
 	mlx->win = mlx_new_window(mlx->mlx, WIDTH, HEIGHT, TITLE);
 	if (!mlx->win)
 	{
-#ifndef MLX_MACOS_METAL
-		mlx_destroy_display(mlx->mlx);
-#endif
+		ft_mlx_destroy_display(mlx->mlx);
 		ft_ptr_check(mlx->win, "[main] mlx_new_window errored.", 1, mlx->mlx);
 	}
 }
 
 void	init_mlx_image(t_mlx *mlx)
 {
-	int bits_per_pixel;
-	int size_line;
-	int endianess;
+	int	bits_per_pixel;
+	int	size_line;
+	int	endianess;
 
 	mlx->img = mlx_new_image(mlx->mlx, WIDTH, HEIGHT);
 	if (!mlx->img)
 	{
-#ifndef MLX_MACOS_METAL
 		mlx_destroy_window(mlx->mlx, mlx->win);
-		mlx_destroy_display(mlx->mlx);
-#endif
+		ft_mlx_destroy_display(mlx->mlx);
 		ft_ptr_check(mlx->img, "[main] mlx_new_image errored.", 1, mlx->mlx);
 	}
-	mlx->img_data = (int *)mlx_get_data_addr(
+	mlx->img_data = (int *)mlx_get_data_addr(\
 		mlx->img, &bits_per_pixel, &size_line, &endianess);
 	mlx->size_line_char = (size_t)size_line;
 	mlx->size_line_int = (size_t)(size_line / 4);
@@ -50,34 +46,15 @@ void	init_mlx_image(t_mlx *mlx)
 void	clear_mlx(t_mlx *mlx)
 {
 	mlx_destroy_image(mlx->mlx, mlx->img);
-#ifndef MLX_MACOS_METAL
 	mlx_destroy_window(mlx->mlx, mlx->win);
-	mlx_destroy_display(mlx->mlx);
-#endif
+	ft_mlx_destroy_display(mlx->mlx);
 	ft_memdel(&(mlx->mlx));
 }
 
-#if defined(MLX_LINUX)
-
-void	init_mlx_hooks_platform(t_wolf *wolf)
-{
-	mlx_hook(wolf->mlx->win,
-		EVENT_CLIENT_MESSAGE, STRUCTURE_NOTIFY_MASK, loop_destroy_hook, wolf);
-}
-
-#elif defined(MLX_MACOS_METAL) || defined(MLX_MACOS)
-
-void	init_mlx_hooks_platform(t_wolf *wolf)
-{
-	mlx_hook(wolf->mlx->win,
-		EVENT_DESTROY_NOTIFY, 0, loop_destroy_hook, wolf);
-}
-
-#endif
-
 void	init_mlx_hooks(t_wolf *wolf)
 {
-	mlx_hook(wolf->mlx->win, EVENT_KEY_PRESS, KEY_PRESS_MASK, loop_key_hook, wolf);
+	mlx_hook(\
+		wolf->mlx->win, EVENT_KEY_PRESS, KEY_PRESS_MASK, loop_key_hook, wolf);
 	mlx_loop_hook(wolf->mlx->mlx, loop_hook, wolf);
 	init_mlx_hooks_platform(wolf);
 }
