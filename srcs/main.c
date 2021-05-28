@@ -26,7 +26,6 @@ void	init_wolf(t_wolf *wolf)
 		| FLAG_REDRAW;
 	wolf->map_width = 7;
 	wolf->map_height = 7;
-	//wolf->map = "1111111100000110000011000001100000110000011111111";
 	wolf->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 
@@ -36,6 +35,7 @@ int		main(int argc, char *argv[])
 	t_mlx		mlx;
 	t_player	player;
 	int			fd;
+	int			res;
 
 	if (argc != 2)
 	{
@@ -44,12 +44,11 @@ int		main(int argc, char *argv[])
 	}
 	fd = open(argv[1], O_RDONLY);
 	if (fd < 3)
-		error_exit(15);
-	argc = read(fd, NULL, 0);
-	if (argc != 0)
-		error_exit(25);
-	if (parser(&wolf, fd) == -1)
-		error_exit(0);
+		error_exit(ERR_OPEN);
+	res = read(fd, NULL, 0);
+	if (res != 0)
+		error_exit(ERR_READ);
+	parser(&wolf, fd);
 	init_player(&player);
 	wolf.player = &player;
 	init_mlx(&mlx);

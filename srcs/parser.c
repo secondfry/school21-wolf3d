@@ -2,65 +2,119 @@
 
 void    error_exit(int c)
 {
-    if (c == 15)
-        ft_putendl("Map file does not exist\n");
-    if (c == 25)
-        ft_putendl("Read map error\n");
-    if (c == 0)
-        ft_putendl("Error filemap, map is invalid\n");
-    exit(0);
+	if (c == ERR_OPEN)
+		ft_putendl_fd("Can't open map.", 2);
+	if (c == ERR_READ)
+		ft_putendl_fd("Can't read map.", 2);
+	if (c == ERR_MEM)
+		ft_putendl("Memory error.");
+	if (c == ERR_MAP_INVALID_CHARACTERS)
+		ft_putendl_fd("Map has invalid characters.", 2);
+	if (c == ERR_MAP_EMPTY)
+		ft_putendl_fd("Map is empty.", 2);
+	if (c == ERR_MAP_HAS_EMPTY_LINE)
+		ft_putendl_fd("Map has empty line in it.", 2);
+	if (c == ERR_MAP_HAS_DIFFERENT_WIDTH_LINES)
+		ft_putendl_fd("Map has different width lines in it.", 2);
+	if (c == ERR_MAP_INVALID_WIDTH)
+		ft_putendl_fd("Map has invalid width.", 2);
+	if (c == ERR_MAP_INVALID_HEIGHT)
+		ft_putendl_fd("Map has invalid height.", 2);
+	exit(c);
 }
 
-int     parser(t_wolf *wolf, int fd)
+void	parser(t_wolf *wolf, int fd)
 {
-    char    *x;
+	char	*map;
+	size_t	width;
+	size_t	height;
 
-    x = reader(fd);
-    valid(x);
-    wolf->map = x;
-    free(x);
-    return(0);
+	map = reader(fd, &width, &height);
+	wolf->map_width = width;
+	wolf->map_height = height;
+	wolf->map = map;
 }
 
-char    *reader(int fd)
+static void	check_size(char *line, t_byte gnl_res)
 {
-    char    buf[BUF_SIZE_PLUS_ONE];
-    int     s;
-    char    *str;
-    char    *tmp;
+	static size_t	width;
+	size_t			len;
 
-    str = 0;
-    while(1)
-    {
-        s = read(fd, buf, BUF_SIZE);
-        buf[s] = 0;
-        if (s < 0)
-        {
-            ft_putendl("Read error");
-            exit(1);
-        }
-        tmp = ft_strnew(ft_strlen(str) + s + 1);
-        ft_strcat(tmp, str);
-        ft_strcat(tmp, buf);
-        ft_memdel((void**)&str);
-        str = tmp;
-        if (s < BUF_SIZE)
-            return (str);
-    }
+	len = ft_strlen(line);
+	if (gnl_res == 0)
+	{
+		if (width == 0)
+			error_exit(ERR_MAP_EMPTY);
+		else
+			return ;
+	}
+	if (!len)
+		error_exit(ERR_MAP_HAS_EMPTY_LINE);
+	if (width == 0)
+	{
+		width = len;
+		return ;
+	}
+	if (width != len)
+		error_exit(ERR_MAP_HAS_DIFFERENT_WIDTH_LINES);
 }
 
-void    valid(char *x)
+char	*reader(int fd, size_t *width, size_t *height)
 {
-    int     i;
+	char	*line;
+	char	*str;
+	char	*tmp;
+	t_byte	gnl_res;
 
-    i = 0;
-    while (x[i])
-    {
-        if (x[i] != '0' && x[i] != '1')
-        {
-            free(x);
-            error_exit(0);
-        }
-        i++;
-    }
+	gnl_res = get_next_line(fd, &line);
+	if (gnl_res < 1)
+		error_exit(ERR_MAP_INVALID_WIDTH);
+	*width = ft_atoi(line);
+	if (ft_strcmp(line, ft_itoa(*width)))
+		error_exit(ERR_MAP_INVALID_WIDTH);
+	ft_memdel((void**)&line);
+	gnl_res = get_next_line(fd, &line);
+	if (gnl_res < 1)
+		error_exit(ERR_MAP_INVALID_HEIGHT);
+	*height = ft_atoi(line);
+	if (ft_strcmp(line, ft_itoa(*height)))
+		error_exit(ERR_MAP_INVALID_HEIGHT);
+	ft_memdel((void**)&line);
+
+	str = (void *)0;
+	while(1)
+	{
+		gnl_res = get_next_line(fd, &line);
+		check_size(line, gnl_res);
+		if (gnl_res < 0)
+			error_exit(ERR_READ);
+		tmp = ft_strnew(ft_strlen(str) + ft_strlen(line) + 1);
+		if (!tmp)
+			error_exit(ERR_MEM);
+		ft_strcat(tmp, str);
+		ft_strcat(tmp, line);
+		ft_memdel((void**)&str);
+		ft_memdel((void**)&line);
+		str = tmp;
+		valid(str);
+		if (gnl_res == 0)
+			break;
+	}
+	return (str);
+}
+
+void    valid(char *map)
+{
+	size_t	i;
+
+	i = 0;
+	while (map[i])
+	{
+		if (map[i] != '0' && map[i] != '1')
+		{
+			ft_memdel((void **)&map);
+			error_exit(ERR_MAP_INVALID_CHARACTERS);
+		}
+		i++;
+	}
 }

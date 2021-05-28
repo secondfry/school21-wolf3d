@@ -15,8 +15,8 @@
 
 # include "libft.h"
 
-# define BUF_SIZE 10000000
-# define BUF_SIZE_PLUS_ONE 10000001
+# define BUF_SIZE 1000000
+# define BUF_SIZE_PLUS_ONE 1000001
 # define WIDTH 1280
 # define HEIGHT 720
 # define TITLE "wolf3d"
@@ -211,5 +211,15 @@ enum			e_masks
 # define TEX_EAST_FILENAME	"./textures/e_cat.bmp"
 # define TEX_SOUTH_FILENAME	"./textures/s_kus.bmp"
 # define TEX_WEST_FILENAME	"./textures/w_fish.bmp"
+
+# define ERR_MEM							35
+# define ERR_READ							25
+# define ERR_MAP_INVALID_CHARACTERS			1
+# define ERR_OPEN							2
+# define ERR_MAP_EMPTY						3
+# define ERR_MAP_HAS_EMPTY_LINE				4
+# define ERR_MAP_HAS_DIFFERENT_WIDTH_LINES	5
+# define ERR_MAP_INVALID_WIDTH				6
+# define ERR_MAP_INVALID_HEIGHT				7
 
 #endif

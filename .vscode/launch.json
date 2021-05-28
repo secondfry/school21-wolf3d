@@ -27,7 +27,7 @@
       "type": "cppdbg",
       "request": "launch",
       "program": "${workspaceFolder}/wolf3d",
-      "args": [],
+      "args": ["maps/map_without_lf"],
       "stopAtEntry": false,
       "cwd": "${workspaceFolder}",
       "environment": [],
