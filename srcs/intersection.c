@@ -23,11 +23,7 @@ t_byte	is_wall(t_wolf *wolf, unsigned short x, unsigned short y)
 	return (wolf->map[wolf->map_width * y + x] == '1');
 }
 
-t_point	intersection_horizontal(
-	t_wolf *wolf,
-	float angle,
-	unsigned short wall_y
-)
+t_point	intersection_horizontal(t_wolf *wolf, float angle, float wall_y)
 {
 	float			dy;
 	float			dx;
@@ -65,11 +61,7 @@ t_point	intersection_horizontal(
 	}
 }
 
-t_point	intersection_vertical(
-	t_wolf *wolf,
-	float angle,
-	unsigned short wall_x
-)
+t_point	intersection_vertical(t_wolf *wolf, float angle, float wall_x)
 {
 	float			dy;
 	float			dx;
