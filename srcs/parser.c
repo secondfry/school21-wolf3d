@@ -20,6 +20,10 @@ void    error_exit(int c)
 		ft_putendl_fd("Map has invalid width.", 2);
 	if (c == ERR_MAP_INVALID_HEIGHT)
 		ft_putendl_fd("Map has invalid height.", 2);
+	if (c == ERR_MAP_BLOCKED_PLAYER)
+		ft_putendl_fd("Player position is blocked on the map.", 2);
+	if (c == ERR_MAP_SMOL)
+		ft_putendl_fd("Map is less than 3x3.", 2);
 	exit(c);
 }
 
@@ -30,6 +34,10 @@ void	parser(t_wolf *wolf, int fd)
 	size_t	height;
 
 	map = reader(fd, &width, &height);
+	if (map[width + 1] == '1')
+		error_exit(ERR_MAP_BLOCKED_PLAYER);
+	if (width < 3 || height < 3)
+		error_exit(ERR_MAP_SMOL);
 	wolf->map_width = width;
 	wolf->map_height = height;
 	wolf->map = map;

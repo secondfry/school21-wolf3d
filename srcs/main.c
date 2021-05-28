@@ -15,17 +15,15 @@
 
 void	init_player(t_player *player)
 {
-	player->pos.x = 7 * 32;
-	player->pos.y = 7 * 32;
-	player->angle = 45.0f;
+	player->pos.x = 3 * 32;
+	player->pos.y = 3 * 32;
+	player->angle = 135.0f;
 }
 
 void	init_wolf(t_wolf *wolf)
 {
 	wolf->flags = FLAG_INVALIDATE_POSITION | FLAG_INVALIDATE_ROTATION
 		| FLAG_REDRAW;
-	wolf->map_width = 7;
-	wolf->map_height = 7;
 	wolf->projection_distance = WIDTH / 2 / tanf(FOV / 2 * M_PI_F / 180);
 }
 

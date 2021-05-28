@@ -221,5 +221,7 @@ enum			e_masks
 # define ERR_MAP_HAS_DIFFERENT_WIDTH_LINES	5
 # define ERR_MAP_INVALID_WIDTH				6
 # define ERR_MAP_INVALID_HEIGHT				7
+# define ERR_MAP_BLOCKED_PLAYER				8
+# define ERR_MAP_SMOL						9
 
 #endif
