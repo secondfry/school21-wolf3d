@@ -21,15 +21,15 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 
 	if (!dst || !src || !n)
 		return (dst);
-	dst_ulong = (t_ulong*)dst;
-	src_ulong = (const t_ulong*)src;
+	dst_ulong = (t_ulong *)dst;
+	src_ulong = (const t_ulong *)src;
 	while (n > sizeof(long))
 	{
 		*dst_ulong++ = *src_ulong++;
 		n -= sizeof(long);
 	}
-	dst_byte = (t_byte*)dst_ulong;
-	src_byte = (const t_byte*)src_ulong;
+	dst_byte = (t_byte *)dst_ulong;
+	src_byte = (const t_byte *)src_ulong;
 	while (n--)
 		*dst_byte++ = *src_byte++;
 	return (dst);

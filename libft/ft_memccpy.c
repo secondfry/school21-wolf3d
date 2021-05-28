@@ -27,5 +27,5 @@ void	*ft_memccpy(void *dst, const void *src, int c, size_t n)
 		return (dst + copy_len);
 	}
 	ft_memcpy(dst, src, n);
-	return ((void*)0);
+	return ((void *)0);
 }

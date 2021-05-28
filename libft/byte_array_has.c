@@ -12,7 +12,7 @@
 
 #include "array.h"
 
-t_byte			byte_array_has(t_byte_array *arr, t_byte data)
+t_byte	byte_array_has(t_byte_array *arr, t_byte data)
 {
 	size_t	i;
 

@@ -24,17 +24,17 @@ static t_ulong	make_memory_cell(int c)
 	return (ret);
 }
 
-static void		align_pointer(void **b, int c, size_t *len)
+static void	align_pointer(void **b, int c, size_t *len)
 {
 	t_byte	*dest;
 
-	dest = (t_byte*)*b;
+	dest = (t_byte *)*b;
 	while ((t_ulong)dest % sizeof(long) != 0 && *len > 0)
 	{
 		*dest++ = (t_byte)c;
 		*len -= 1;
 	}
-	*b = (void*)dest;
+	*b = (void *)dest;
 }
 
 static size_t	fill_eight_ulongs(void **b, t_ulong cell, size_t len)
@@ -43,7 +43,7 @@ static size_t	fill_eight_ulongs(void **b, t_ulong cell, size_t len)
 	size_t	ops;
 	size_t	size;
 
-	dest = (t_ulong*)*b;
+	dest = (t_ulong *)*b;
 	size = 8 * sizeof(long);
 	ops = len / size;
 	while (ops--)
@@ -59,7 +59,7 @@ static size_t	fill_eight_ulongs(void **b, t_ulong cell, size_t len)
 		dest += 8;
 		len -= size;
 	}
-	*b = (void*)dest;
+	*b = (void *)dest;
 	return (len);
 }
 
@@ -68,18 +68,18 @@ static size_t	fill_ulong(void **b, t_ulong cell, size_t len)
 	t_ulong	*dest;
 	size_t	ops;
 
-	dest = (t_ulong*)*b;
+	dest = (t_ulong *)*b;
 	ops = len / sizeof(long);
 	while (ops--)
 	{
 		*dest++ = cell;
 		len -= sizeof(long);
 	}
-	*b = (void*)dest;
+	*b = (void *)dest;
 	return (len);
 }
 
-void			*ft_memset(void *b, int c, size_t len)
+void	*ft_memset(void *b, int c, size_t len)
 {
 	t_ulong	cell;
 	t_ulong	*dest;
@@ -91,10 +91,10 @@ void			*ft_memset(void *b, int c, size_t len)
 	ret = b;
 	cell = make_memory_cell(c);
 	align_pointer(&b, c, &len);
-	dest = (t_ulong*)b;
-	len = fill_eight_ulongs((void**)&dest, cell, len);
-	len = fill_ulong((void**)&dest, cell, len);
-	dest_byte = (t_byte*)dest;
+	dest = (t_ulong *)b;
+	len = fill_eight_ulongs((void **)&dest, cell, len);
+	len = fill_ulong((void **)&dest, cell, len);
+	dest_byte = (t_byte *)dest;
 	while (len--)
 		*dest_byte++ = (t_byte)c;
 	return (ret);

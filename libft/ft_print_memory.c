@@ -56,13 +56,13 @@ static t_byte	ft_print_memory_data(t_byte *data, size_t size)
 	return (i);
 }
 
-void			ft_print_memory(const void *addr, size_t size)
+void	ft_print_memory(const void *addr, size_t size)
 {
 	t_byte	*data;
 	t_byte	i;
 
 	i = 0;
-	data = (t_byte*)addr;
+	data = (t_byte *)addr;
 	while (size)
 	{
 		ft_print_ptr(data);

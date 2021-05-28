@@ -23,15 +23,15 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 		return (dst);
 	if (dst < src)
 		return (ft_memcpy(dst, src, len));
-	dst_ulong = (t_ulong*)((t_byte*)dst + len);
-	src_ulong = (const t_ulong*)((t_byte*)src + len);
+	dst_ulong = (t_ulong *)((t_byte *)dst + len);
+	src_ulong = (const t_ulong *)((t_byte *)src + len);
 	while (len > sizeof(long))
 	{
 		*--dst_ulong = *--src_ulong;
 		len -= sizeof(long);
 	}
-	dst_byte = (t_byte*)dst_ulong;
-	src_byte = (const t_byte*)src_ulong;
+	dst_byte = (t_byte *)dst_ulong;
+	src_byte = (const t_byte *)src_ulong;
 	while (len--)
 		*--dst_byte = *--src_byte;
 	return (dst);

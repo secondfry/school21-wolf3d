@@ -29,7 +29,7 @@ static char	*find_end(char *str)
 	return (ret);
 }
 
-char		*ft_strtrim(char const *s)
+char	*ft_strtrim(char const *s)
 {
 	char	*start;
 	char	*end;

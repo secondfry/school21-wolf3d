@@ -39,7 +39,7 @@ static size_t	count_words(char const *str, char sep)
 	return (ret);
 }
 
-static char		*make_word(char const **str, char sep)
+static char	*make_word(char const **str, char sep)
 {
 	char const	*tmp;
 	char		*ret;
@@ -65,7 +65,7 @@ static char		*make_word(char const **str, char sep)
 	return (ret);
 }
 
-static void		cleanup(char **arr, size_t len)
+static void	cleanup(char **arr, size_t len)
 {
 	size_t	i;
 
@@ -75,7 +75,7 @@ static void		cleanup(char **arr, size_t len)
 	ft_memdel((void **)&arr);
 }
 
-char			**ft_strsplit(char const *s, char c)
+char	**ft_strsplit(char const *s, char c)
 {
 	size_t	words_count;
 	size_t	i;

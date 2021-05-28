@@ -20,7 +20,9 @@ char	*ft_strsub(char const *s, unsigned int start, size_t len)
 		return ((void *)0);
 	if (len + 1 == 0)
 		return ((void *)0);
-	ret = ft_strnew(len + 1);
+	if (len > ft_strlen(s))
+		return (ft_strnew(0));
+	ret = ft_strnew(len);
 	if (!ret)
 		return ((void *)0);
 	ft_strncpy(ret, s + start, len);

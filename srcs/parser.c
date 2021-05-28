@@ -60,7 +60,7 @@ static char	*reader(int fd, size_t *width, size_t *height)
 		check_size(line, gnl_res);
 		if (gnl_res < 0)
 			error_exit(ERR_READ);
-		tmp = ft_strnew(ft_strlen(str) + ft_strlen(line) + 1);
+		tmp = ft_strnew(ft_strlen(str) + ft_strlen(line));
 		if (!tmp)
 			error_exit(ERR_MEM);
 		ft_strcat(tmp, str);

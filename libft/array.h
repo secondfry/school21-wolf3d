@@ -16,7 +16,7 @@
 
 # include "libft.h"
 
-typedef struct	s_byte_array
+typedef struct s_byte_array
 {
 	t_byte	*data;
 	size_t	used;

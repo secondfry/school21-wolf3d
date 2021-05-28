@@ -23,7 +23,7 @@ static t_byte	ft_issign(char c)
 ** base is not implemented
 */
 
-long			ft_strtol(const char *str, char **endptr, int base)
+long	ft_strtol(const char *str, char **endptr, int base)
 {
 	t_ulong	ret;
 	char	sign;
@@ -36,16 +36,18 @@ long			ft_strtol(const char *str, char **endptr, int base)
 	while (str[i] && ft_isspace(str[i]))
 		i++;
 	if (ft_issign(str[i]))
-		sign = str[i++] == '-' ? -1 : 1;
+		sign -= (str[i++] == '-') * 2;
 	if (ft_isdigit(str[i]))
+	{
 		while (str[i] && ft_isdigit(str[i]))
 		{
 			if (ret > LONG_MAX / base
 				|| (t_byte)(str[i] - 48) > LONG_MAX - ret * base)
-				return (sign == -1 ? LONG_MIN : LONG_MAX);
+				return ((sign == -1) * LONG_MIN + (sign == 1) * LONG_MAX);
 			ret = ret * base + str[i] - 48;
 			i++;
 		}
-	*endptr = (char*)(str + i);
+	}
+	*endptr = (char *)(str + i);
 	return (sign * ret);
 }

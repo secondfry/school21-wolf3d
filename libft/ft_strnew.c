@@ -14,5 +14,9 @@
 
 char	*ft_strnew(size_t size)
 {
-	return ((char *)ft_memalloc(size));
+	if (size > SIZE_MAX - 1)
+	{
+		return ((void *)0);
+	}
+	return ((char *)ft_memalloc(size + 1));
 }

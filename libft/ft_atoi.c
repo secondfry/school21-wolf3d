@@ -12,9 +12,9 @@
 
 #include "libft.h"
 
-int		ft_atoi(const char *str)
+int	ft_atoi(const char *str)
 {
-	char *endptr;
+	char	*endptr;
 
 	return ((int)ft_strtol(str, &endptr, 10));
 }

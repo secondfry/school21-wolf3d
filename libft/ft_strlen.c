@@ -24,22 +24,22 @@ static t_ulong	make_memory_cell(int c)
 	return (ret);
 }
 
-static void		*align_pointer(const char **b)
+static void	*align_pointer(const char **b)
 {
 	t_byte	*dest;
 
-	dest = (t_byte*)*b;
+	dest = (t_byte *)*b;
 	while ((t_ulong)dest % sizeof(long) != 0)
 	{
 		if (*dest == 0)
 			return (dest);
 		dest++;
 	}
-	*b = (void*)dest;
+	*b = (void *)dest;
 	return ((void *)0);
 }
 
-static void		*check_bytes(t_byte *data)
+static void	*check_bytes(t_byte *data)
 {
 	if (*(data + 0) == 0)
 		return ((void *)(data + 0));
@@ -60,7 +60,7 @@ static void		*check_bytes(t_byte *data)
 	return ((void *)0);
 }
 
-static void		*check_ulong(t_ulong *data)
+static void	*check_ulong(t_ulong *data)
 {
 	t_ulong	cell_one;
 	t_ulong	cell_eighties;
@@ -77,7 +77,7 @@ static void		*check_ulong(t_ulong *data)
 	return ((void *)0);
 }
 
-size_t			ft_strlen(const char *s)
+size_t	ft_strlen(const char *s)
 {
 	void	*ret;
 	void	*save;

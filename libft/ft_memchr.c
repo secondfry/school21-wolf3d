@@ -24,11 +24,11 @@ static t_ulong	make_memory_cell(int c)
 	return (ret);
 }
 
-static void		*align_pointer(const void **b, t_byte c, size_t *len)
+static void	*align_pointer(const void **b, t_byte c, size_t *len)
 {
 	t_byte	*dest;
 
-	dest = (t_byte*)*b;
+	dest = (t_byte *)*b;
 	while ((t_ulong)dest % sizeof(long) != 0 && *len)
 	{
 		if (*dest == c)
@@ -36,11 +36,11 @@ static void		*align_pointer(const void **b, t_byte c, size_t *len)
 		dest++;
 		*len -= 1;
 	}
-	*b = (void*)dest;
+	*b = (void *)dest;
 	return ((void *)0);
 }
 
-static void		*check_bytes(t_byte *data, t_byte c, t_byte len)
+static void	*check_bytes(t_byte *data, t_byte c, t_byte len)
 {
 	if (len > 0 && *(data + 0) == c)
 		return ((void *)(data + 0));
@@ -61,12 +61,12 @@ static void		*check_bytes(t_byte *data, t_byte c, t_byte len)
 	return ((void *)0);
 }
 
-static void		*check_ulong(t_ulong *data, t_byte c)
+static void	*check_ulong(t_ulong *data, t_byte c)
 {
 	t_ulong	cell;
 	t_ulong	cell_one;
 	t_ulong	cell_eighties;
-	t_ulong temp;
+	t_ulong	temp;
 	void	*ptr;
 
 	cell = make_memory_cell(c);
@@ -82,7 +82,7 @@ static void		*check_ulong(t_ulong *data, t_byte c)
 	return ((void *)0);
 }
 
-void			*ft_memchr(const void *s, int c, size_t n)
+void	*ft_memchr(const void *s, int c, size_t n)
 {
 	void	*ret;
 	t_ulong	*str_ulong;
