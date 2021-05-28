@@ -9,10 +9,10 @@ static int	*texture_read(int fd, size_t size)
 
 	if (size != 3 * 64 * 64)
 		exit(0);
-	data = (t_byte *)malloc(sizeof(t_byte) * size);
+	data = (t_byte *)ft_memalloc(sizeof(t_byte) * size);
 	if (!data)
 		exit(0);
-	ret = (int *)malloc(sizeof(int) * size / 3);
+	ret = (int *)ft_memalloc(sizeof(int) * size / 3);
 	if (!ret)
 		exit(0);
 	len = read(fd, data, size);
