@@ -25,7 +25,7 @@
 # define STATUS_EOF 0
 # define STATUS_READ 1
 
-typedef struct	s_fd_list
+typedef struct s_fd_list
 {
 	int					fd;
 	char				*leftovers;
