@@ -113,11 +113,12 @@ void	loop_redraw(t_wolf *wolf)
 
 		if (hor.x == 0 && hor.y == 0)
 			draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1);
-		if (ver.x == 0 && ver.y == 0)
+		else if (ver.x == 0 && ver.y == 0)
 			draw_wall(wolf, hor, angle, dh, col, ((int)hor.x) % 64, 0);
-		dh > dv
-			? draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1)
-			: draw_wall(wolf, hor, angle, dh, col, ((int)hor.x) % 64, 0);
+		else
+			dh > dv
+				? draw_wall(wolf, ver, angle, dv, col, ((int)ver.y) % 64, 1)
+				: draw_wall(wolf, hor, angle, dh, col, ((int)hor.x) % 64, 0);
 	}
 	mlx_put_image_to_window(wolf->mlx->mlx, wolf->mlx->win, wolf->mlx->img, 0, 0);
 }
