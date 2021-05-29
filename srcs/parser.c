@@ -27,22 +27,27 @@ static void	check_size(char *line, t_byte gnl_res)
 static void	reader_dimensions(int fd, size_t *width, size_t *height)
 {
 	char	*line;
+	char	*tmp;
 	t_byte	gnl_res;
 
 	gnl_res = get_next_line(fd, &line);
 	if (gnl_res < 1)
 		error_exit(ERR_MAP_INVALID_WIDTH);
 	*width = ft_atoi(line);
-	if (ft_strcmp(line, ft_itoa(*width)))
+	tmp = ft_itoa(*width);
+	if (ft_strcmp(line, tmp))
 		error_exit(ERR_MAP_INVALID_WIDTH);
 	ft_memdel((void **)&line);
+	ft_memdel((void **)&tmp);
 	gnl_res = get_next_line(fd, &line);
 	if (gnl_res < 1)
 		error_exit(ERR_MAP_INVALID_HEIGHT);
 	*height = ft_atoi(line);
-	if (ft_strcmp(line, ft_itoa(*height)))
+	tmp = ft_itoa(*height);
+	if (ft_strcmp(line, tmp))
 		error_exit(ERR_MAP_INVALID_HEIGHT);
 	ft_memdel((void **)&line);
+	ft_memdel((void **)&tmp);
 }
 
 static char	*reader(int fd, size_t *width, size_t *height)
