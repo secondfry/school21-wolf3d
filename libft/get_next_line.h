@@ -20,20 +20,10 @@
 # include <unistd.h>
 
 # define BUFF_SIZE 1
-# define NL 2
 # define STATUS_ERR -1
 # define STATUS_EOF 0
 # define STATUS_READ 1
 
-typedef struct s_fd_list
-{
-	int					fd;
-	char				*leftovers;
-	char				buffer[BUFF_SIZE + 1];
-	struct s_fd_list	*next;
-
-}				t_fd_list;
-
-int				get_next_line(const int fd, char **line);
+int			get_next_line(const int fd, char **line);
 
 #endif

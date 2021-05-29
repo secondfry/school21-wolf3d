@@ -49,14 +49,20 @@ DEPS =		$(patsubst %,objs/ft_%.d,$(LFT_FUNCTIONS)) \
 OBJ_DIR = ./objs
 
 CFLAGS_ERRORS = -Wall -Wextra -Werror
-CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
+
+ifeq ($(DEBUG),1)
+	CFLAGS_OPTIMIZATIONS = -funroll-loops
+	CFLAGS_DEBUG = -O0 -pg -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer
+else
+	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
+	CFLAGS_DEBUG =
+endif
+
 CFLAGS_DEPENDENCIES = -MMD -MP
 CFLAGS_SO = -fPIC -shared
-CFLAGS_DEBUG =	-O0 \
-				-pg -g \
-				-fno-omit-frame-pointer -mno-omit-leaf-frame-pointer \
-				-fsanitize=address
+CFLAGS_ASAN = -fsanitize=address
 CFLAGS :=	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) $(CFLAGS_DEPENDENCIES) \
+			$(CFLAGS_DEBUG) \
 			$(CFLAGS)
 
 NAME = libft.a

@@ -105,4 +105,5 @@ void	parser(t_wolf *wolf, int fd)
 	wolf->map_width = width;
 	wolf->map_height = height;
 	wolf->map = map;
+	ft_putendl(map);
 }

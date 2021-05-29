@@ -67,15 +67,22 @@ else
 endif
 
 CFLAGS_ERRORS = -Wall -Wextra -Werror
-CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
+
+ifeq ($(DEBUG),1)
+	CFLAGS_OPTIMIZATIONS = -funroll-loops
+	CFLAGS_DEBUG = -O0 -pg -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer
+else
+	CFLAGS_OPTIMIZATIONS = -O3 -funroll-loops
+	CFLAGS_DEBUG =
+endif
+
 CFLAGS_DEPENDENCIES = -MMD -MP
 CFLAGS_INCLUDES = -I$(INCLUDES_DIR) -I$(LIB_DIR) -I$(MLX_DIR)
-CFLAGS_DEBUG = -O0 -pg -g -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer
 CFLAGS_ASAN = -fsanitize=address
 
 CFLAGS_FINAL =	$(CFLAGS_ERRORS) $(CFLAGS_OPTIMIZATIONS) \
 				$(CFLAGS_DEPENDENCIES) $(CFLAGS_INCLUDES) \
-				$(CFLAGS_PLATFORM) $(CFLAGS_INTERNAL) \
+				$(CFLAGS_PLATFORM) $(CFLAGS_DEBUG) $(CFLAGS_INTERNAL) \
 				$(CFLAGS)
 
 LDFLAGS += -L$(LIB_DIR) -lft -L$(MLX_DIR) -lmlx
@@ -93,12 +100,12 @@ CYAN = "\033[0;36m"
 all:
 	@echo $(CYAN) "Making libft" $(DEFAULT)
 	@echo -n $(BLUE)
-	CC="$(CC)" $(MAKE) -C $(LIB_DIR)
+	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(LIB_DIR)
 	@echo -n $(DEFAULT)
 
 	@echo $(CYAN) "Making minilibx" $(DEFAULT)
 	@echo -n $(BLUE)
-	CC="$(CC)" $(MAKE) -C $(MLX_DIR)
+	CC="$(CC)" DEBUG="$(DEBUG)" $(MAKE) -C $(MLX_DIR)
 	cp $(MLX_DIR)/$(MLX) $(MLX)
 	@echo -n $(DEFAULT)
 
@@ -157,7 +164,7 @@ fclean_self: clean_self
 	@echo -n $(DEFAULT)
 
 debug: clean_self
-	CFLAGS_INTERNAL="$(CFLAGS_DEBUG)" $(MAKE) all
+	DEBUG="1" $(MAKE) all
 
 debug_wsl:
 	@echo "Don't forget to run on Windows host:"
@@ -167,14 +174,14 @@ debug_wsl:
 	$(MAKE) debug
 
 debug_all: clean_self clean_libs
-	CFLAGS_INTERNAL="$(CFLAGS_DEBUG)" $(MAKE) all
+	DEBUG="1" $(MAKE) all
 
 asan: clean_self
-	CFLAGS_INTERNAL="$(CFLAGS_DEBUG) $(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
+	DEBUG="1" CFLAGS_INTERNAL="$(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
 	$(MAKE) all
 
 asan_all: clean_self clean_libs
-	CFLAGS_INTERNAL="$(CFLAGS_DEBUG) $(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
+	DEBUG="1" CFLAGS_INTERNAL="$(CFLAGS_ASAN)" LDFLAGS="$(LDFLAGS_ASAN)" \
 	$(MAKE) all
 
 re: fclean all
