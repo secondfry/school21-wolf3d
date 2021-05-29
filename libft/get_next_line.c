@@ -55,13 +55,9 @@ int	get_next_line(const int fd, char **line)
 	if (status == STATUS_EOF)
 	{
 		rlen = read(fd, buffer, BUFF_SIZE);
-		if (rlen < 0)
-			return (STATUS_ERR);
-		if (rlen == 0)
-			return (STATUS_EOF);
+		if (rlen < 1)
+			return ((rlen < 0) * STATUS_ERR + (rlen == 0) * STATUS_EOF);
 		status = get_next_line(fd, &tmp[0]);
-		if (status == STATUS_ERR)
-			return (STATUS_ERR);
 		tmp[1] = ft_strjoin(*line, tmp[0]);
 		ft_memdel((void **)line);
 		ft_memdel((void **)&tmp[0]);
