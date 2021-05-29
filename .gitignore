@@ -238,3 +238,6 @@ iOSInjectionProject/
 ###Personal###
 wolf3d
 minilibx-linux/test/mlx-test
+*.swiftmodule
+*.swiftsourceinfo
+*.swiftdoc
