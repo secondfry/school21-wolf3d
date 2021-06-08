@@ -28,7 +28,7 @@ static void	reader_dimensions(int fd, size_t *width, size_t *height)
 {
 	char	*line;
 	char	*tmp;
-	t_byte	gnl_res;
+	char	gnl_res;
 
 	gnl_res = get_next_line(fd, &line);
 	if (gnl_res < 1)
